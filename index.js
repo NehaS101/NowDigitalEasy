@@ -4,15 +4,19 @@ const connection = require('./Config/db');
 const UserRouter = require('./Route/route');
 dotenv.config();
 
+//express application
 const app = express();
 app.use(express.json());
 
+//application routes
+app.use('/api',UserRouter);
+
+//home Endpoint
 app.use('/',(req, res) =>{
 res.send('This is home endpoint');
 });
 
-app.use('/api/',UserRouter);
-
+//listening server 
 app.listen(process.env.port,async()=>{
     console.log('listening on port '+process.env.port);
     try {
